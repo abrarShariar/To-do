@@ -20,8 +20,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>80</y>
+      <x>40</x>
+      <y>30</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -45,9 +45,9 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>60</y>
+      <y>20</y>
       <width>501</width>
-      <height>51</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
@@ -64,8 +64,8 @@
    <widget class="QCalendarWidget" name="calendarWidget">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>170</y>
+      <x>410</x>
+      <y>140</y>
       <width>256</width>
       <height>183</height>
      </rect>
@@ -74,34 +74,11 @@
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>170</y>
-      <width>131</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-      <weight>50</weight>
-      <bold>false</bold>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="text">
-     <string>Set Deadline:</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>210</y>
+      <y>190</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -115,26 +92,11 @@
      <string>Time Left:</string>
     </property>
    </widget>
-   <widget class="QDateTimeEdit" name="dateTimeEdit">
-    <property name="geometry">
-     <rect>
-      <x>160</x>
-      <y>170</y>
-      <width>194</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>330</y>
+      <x>70</x>
+      <y>290</y>
       <width>251</width>
       <height>41</height>
      </rect>
@@ -156,12 +118,12 @@
      <string>Add Task</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>250</y>
-      <width>341</width>
+      <y>230</y>
+      <width>346</width>
       <height>27</height>
      </rect>
     </property>
@@ -196,14 +158,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QLCDNumber" name="lcdNumber_2"/>
-       </item>
-       <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
           <string/>
          </property>
         </widget>
+       </item>
+       <item>
+        <widget class="QLCDNumber" name="lcdNumber_2"/>
        </item>
        <item>
         <widget class="QLabel" name="label_3">
@@ -232,6 +194,44 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>140</y>
+      <width>271</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>Set Deadline:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="dateTimeEdit">
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -242,22 +242,38 @@
      <height>21</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <property name="maximumSize">
-    <size>
-     <width>16777215</width>
-     <height>16777215</height>
-    </size>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>LeftToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <widget class="QMenu" name="menuAll_Tasks">
+    <property name="title">
+     <string>All Tasks</string>
+    </property>
+    <addaction name="actionUpcoming"/>
+    <addaction name="actionPending"/>
+    <addaction name="actionCompleted"/>
+    <addaction name="actionExpired"/>
+   </widget>
+   <addaction name="menuAll_Tasks"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionUpcoming">
+   <property name="text">
+    <string>Upcoming</string>
+   </property>
+  </action>
+  <action name="actionPending">
+   <property name="text">
+    <string>Pending</string>
+   </property>
+  </action>
+  <action name="actionCompleted">
+   <property name="text">
+    <string>Completed</string>
+   </property>
+  </action>
+  <action name="actionExpired">
+   <property name="text">
+    <string>Expired</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

@@ -1,12 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "dialog.h"
 #include<QTime>
 #include<QDebug>
 
 qint8 getDaysLeft(QDateTime);
 qint16 getHoursLeft(QDateTime);
 qint32 getMinsLeft(QDateTime);
-
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -27,9 +27,6 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_released()
 {
     //prepare deadline in string
-    //QTime currentTime=QTime::currentTime();
-
-
     QTime selectedTime=ui->dateTimeEdit->time();
     QDate selectedDate=ui->calendarWidget->selectedDate();
 
@@ -37,11 +34,31 @@ void MainWindow::on_pushButton_released()
     //time left(hours)
     ui->dateTimeEdit->setTime(selectedTime);
     ui->dateTimeEdit->setDate(selectedDate);
-    QDateTime selectedDateTime=ui->dateTimeEdit->dateTime();
+    QDateTime selectedDateTime=ui->dateTimeEdit->dateTime();        //getting selected deadline
     ui->lcdNumber->display(getDaysLeft(selectedDateTime));
     ui->lcdNumber_2->display(getHoursLeft(selectedDateTime));
     ui->lcdNumber_3->display(getMinsLeft(selectedDateTime));
 }
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QString taskText=ui->plainTextEdit->toPlainText();
+    //show notification window
+    Dialog addTaskNotify;
+    addTaskNotify.exec();
+}
+
+QString MainWindow::getTaskText(){
+    QString taskText=ui->plainTextEdit->toPlainText();
+    return taskText;
+}
+
+QString MainWindow::getTaskDeadline(){
+    QString deadline=ui->dateTimeEdit->dateTime().toString("yyyy-MM-dd hh:mm:ss");
+    return deadline;
+}
+
+
 
 //time left (days)
 qint8 getDaysLeft(QDateTime selected){
@@ -66,3 +83,5 @@ qint32 getMinsLeft(QDateTime selected){
     minsLeft=current.secsTo(selected)/(60);
     return minsLeft;
 }
+
+
