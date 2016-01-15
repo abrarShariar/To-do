@@ -6,10 +6,23 @@ Dialog::Dialog(QWidget *parent) :
     ui(new Ui::Dialog)
 {
     ui->setupUi(this);
-    ui->label->setText("C++");
+
 }
 
 Dialog::~Dialog()
 {
     delete ui;
+}
+
+void Dialog::showTaskText(QString text){
+    ui->label_2->setText(text);
+}
+
+void Dialog::showDeadline(QString text){
+    ui->label_4->setText(text);
+}
+
+void Dialog::on_pushButton_clicked()
+{
+    this->close();
 }

@@ -27,6 +27,14 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_actionUpcoming_triggered();
+
+
+    void on_actionPending_triggered();
+
+    void on_actionCompleted_triggered();
+
+    void on_actionExpired_triggered();
 
 private:
     Ui::MainWindow *ui;

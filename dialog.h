@@ -12,8 +12,14 @@ class Dialog : public QDialog
     Q_OBJECT
 
 public:
+
+    void showTaskText(QString text);
+    void showDeadline(QString text);
     explicit Dialog(QWidget *parent = 0);
     ~Dialog();
+
+private slots:
+    void on_pushButton_clicked();
 
 private:
     Ui::Dialog *ui;
