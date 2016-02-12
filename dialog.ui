@@ -35,6 +35,13 @@
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Meiryo UI</family>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>New task added</string>
    </property>
@@ -50,6 +57,7 @@
    </property>
    <property name="font">
     <font>
+     <family>Meiryo UI</family>
      <pointsize>12</pointsize>
      <weight>50</weight>
      <bold>false</bold>
@@ -70,7 +78,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <family>Meiryo UI</family>
+     <pointsize>11</pointsize>
     </font>
    </property>
    <property name="text">
@@ -88,7 +97,8 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <family>Meiryo UI</family>
+     <pointsize>11</pointsize>
     </font>
    </property>
    <property name="text">

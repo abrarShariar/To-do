@@ -1,6 +1,8 @@
 #include "tasklist.h"
 #include "ui_tasklist.h"
 #include<QtSql>
+#include<QCheckBox>
+#include<QFont>
 
 taskList::taskList(QWidget *parent) :
     QDialog(parent),
@@ -29,7 +31,7 @@ void taskList::showUpcomingTask(){
 
     QDateTime current=QDateTime::currentDateTime();
     QSqlQuery query;
-    query.prepare("SELECT * FROM allTask WHERE deadline>:current");
+    query.prepare("SELECT * FROM allTask WHERE deadline>:current order by deadline");
     query.bindValue(":current",current);
 
     qDebug()<<query.exec();
@@ -37,11 +39,23 @@ void taskList::showUpcomingTask(){
     int taskFieldNo=query.record().indexOf("task");
     int deadlineFieldNo=query.record().indexOf("deadline");
     int indexFieldNo=query.record().indexOf("id");
+    int X=20,Y=50,width=0,height=17,inc=0;                  //for checkbox positioning
     while(query.next()){
         QString task=query.value(taskFieldNo).toString();
+        if(task.length()>50){
+           task.truncate(50);                          //shorten task
+        }
         QString deadline=query.value(deadlineFieldNo).toString();
         QString id=query.value(indexFieldNo).toString();
-        ui->textBrowser->append(id+". "+task+"\n"+deadline+"\n\n");
+        int sz=task.length()+deadline.length()+id.length()+500;
+        width=sz;
+        //checkbox
+        QCheckBox *check=new QCheckBox(this);
+        check->setGeometry(X,Y+inc,width,height);
+        check->setFont(QFont("Meiryo UI",9,5,false));
+        check->setText(task+"      "+deadline);
+        check->show();
+        inc+=30;
     }
 }
 
@@ -49,7 +63,7 @@ void taskList::showExpiredTask()
 {
     QDateTime current=QDateTime::currentDateTime();
     QSqlQuery query;
-    query.prepare("SELECT * FROM allTask WHERE deadline<=:current");
+    query.prepare("SELECT * FROM allTask WHERE deadline<=:current order by deadline DESC");
     query.bindValue(":current",current);
 
     qDebug()<<query.exec();
@@ -57,10 +71,20 @@ void taskList::showExpiredTask()
     int taskFieldNo=query.record().indexOf("task");
     int deadlineFieldNo=query.record().indexOf("deadline");
     int indexFieldNo=query.record().indexOf("id");
+    int X=20,Y=50,width=500,height=20;
     while(query.next()){
         QString task=query.value(taskFieldNo).toString();
         QString deadline=query.value(deadlineFieldNo).toString();
         QString id=query.value(indexFieldNo).toString();
-        ui->textBrowser->append(id+". "+task+"\n"+deadline+"\n\n");
+        //QLabel
+        QLabel *label=new QLabel(this);
+        label->setGeometry(X,Y,width,height);
+        label->setFont(QFont("Meiryo UI",9,5,false));
+        label->setText(task+"  "+deadline);
+        label->show();
+        Y+=30;
     }
+
+
+
 }
