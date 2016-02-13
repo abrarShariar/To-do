@@ -57,7 +57,7 @@ void MainWindow::on_pushButton_2_clicked()
      QString deadline=ui->dateTimeEdit->dateTime().toString("yyyy-MM-dd hh:mm:ss");
 
      //insert into database
-     if(taskText!=""){
+     if(taskText!="" && taskText!=" "){
      QSqlQuery addTaskQuery;
     addTaskQuery.prepare("INSERT INTO allTask(task,deadline) values(:task,:deadline)");
     addTaskQuery.bindValue(":task",taskText);

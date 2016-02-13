@@ -3,6 +3,7 @@
 #include<QtSql>
 #include<QCheckBox>
 #include<QFont>
+#include<QTextBrowser>
 
 taskList::taskList(QWidget *parent) :
     QDialog(parent),
@@ -40,6 +41,9 @@ void taskList::showUpcomingTask(){
     int deadlineFieldNo=query.record().indexOf("deadline");
     int indexFieldNo=query.record().indexOf("id");
     int X=20,Y=50,width=0,height=17,inc=0;                  //for checkbox positioning
+    //QTextBrowser *taskArea=new QTextBrowser(this);
+
+
     while(query.next()){
         QString task=query.value(taskFieldNo).toString();
         if(task.length()>50){
@@ -53,10 +57,11 @@ void taskList::showUpcomingTask(){
         QCheckBox *check=new QCheckBox(this);
         check->setGeometry(X,Y+inc,width,height);
         check->setFont(QFont("Meiryo UI",9,5,false));
-        check->setText(task+"      "+deadline);
-        check->show();
+        check->setText(task+deadline);
+       check->show();
         inc+=30;
     }
+    taskArea->show();
 }
 
 void taskList::showExpiredTask()
@@ -71,20 +76,20 @@ void taskList::showExpiredTask()
     int taskFieldNo=query.record().indexOf("task");
     int deadlineFieldNo=query.record().indexOf("deadline");
     int indexFieldNo=query.record().indexOf("id");
-    int X=20,Y=50,width=500,height=20;
+    int X=10,Y=50,width=471,height=431;
+    QTextBrowser *displayBox=new QTextBrowser(this);
+    displayBox->setGeometry(X,Y,width,height);
+    displayBox->setFont(QFont("Meiryo UI",9,5,false));
+    displayBox->setStyleSheet("QTextBrowser{color:#D24B4B}");
+
     while(query.next()){
         QString task=query.value(taskFieldNo).toString();
         QString deadline=query.value(deadlineFieldNo).toString();
         QString id=query.value(indexFieldNo).toString();
-        //QLabel
-        QLabel *label=new QLabel(this);
-        label->setGeometry(X,Y,width,height);
-        label->setFont(QFont("Meiryo UI",9,5,false));
-        label->setText(task+"  "+deadline);
-        label->show();
-        Y+=30;
+        QString icon;
+        displayBox->append("<strong>"+task+"</strong>");
+        displayBox->append("<em>"+deadline+"<\em>");
+        displayBox->append("\n");
     }
-
-
-
+    displayBox->show();
 }
